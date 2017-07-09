@@ -15,6 +15,5 @@ public class WebServices extends Application {
         HashSet h= new HashSet<Class<?>>();
         h.add(MobServices.class);
         return h;
-}
-
+    }
 }
