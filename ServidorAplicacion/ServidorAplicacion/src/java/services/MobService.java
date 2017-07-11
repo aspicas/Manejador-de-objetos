@@ -26,6 +26,6 @@ public class MobService {
     }
     
     public void removeMob(int id){
-        
+        XMLManager.removeMob(id);
     }
 }

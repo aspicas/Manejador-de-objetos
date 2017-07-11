@@ -8,11 +8,13 @@ package xml;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Mob;
@@ -32,7 +34,8 @@ import org.jdom2.output.XMLOutputter;
 public class XMLManager {
     public static boolean addMobXml(Mob mob){
         Document doc;
-        Element root,child, newChild;
+        Element root, newChild;
+        Element accion, fecha, nombre;
         List <Element> rootChildrens;        
         SAXBuilder builder = new SAXBuilder();
         try
@@ -41,11 +44,22 @@ public class XMLManager {
             root = doc.getRootElement();
             rootChildrens = root.getChildren();
             // Creamos una nueva etiqueta
-            newChild = new Element("mob");            
-            newChild.setAttribute("accion", mob.getAccion());       
-            newChild.setAttribute("fechaCreacion", mob.getFechaCreacion().toString());
+            newChild = new Element("mob");
+            accion = new Element("accion");
+            accion.setText(mob.getAccion());
+            newChild.addContent(accion);
+            fecha = new Element("fechaCreacion");
+            fecha.setText(mob.getFechaCreacion().toString());
+            newChild.addContent(fecha);            
+            nombre = new Element("nombre");
+            nombre.setText(mob.getNombre());
+            newChild.addContent(nombre);
             newChild.setAttribute("id", String.valueOf(mob.getId()));
-            newChild.setAttribute("nombre", mob.getNombre());
+            
+//            newChild.setAttribute("accion", mob.getAccion());       
+//            newChild.setAttribute("fechaCreacion", mob.getFechaCreacion().toString());
+//            newChild.setAttribute("id", String.valueOf(mob.getId()));
+//            newChild.setAttribute("nombre", mob.getNombre());
             root.addContent(newChild);
             try
              {
@@ -92,8 +106,9 @@ public class XMLManager {
             rootChildrens = root.getChildren();            
             for (Element child : rootChildrens) {                
                 if (child.getAttributeValue("id").equals(String.valueOf(id))){
-                    Date d = new Date();
-                    mob = new Mob(id, d, child.getAttributeValue("nombre"), child.getAttributeValue("accion"));
+                    DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+                    Date d = format.parse(child.getChild("fechaCreacion").getText());                   
+                    mob = new Mob(id, d, child.getChild("nombre").getText(), child.getChild("accion").getText());
                     return mob;
                 }
             }            
@@ -101,7 +116,30 @@ public class XMLManager {
             Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+        
+    public static void removeMob(int id){
+        try {
+            Document doc;
+            Element root;
+            List <Element> rootChildrens;
+            SAXBuilder builder = new SAXBuilder();            
+            doc = builder.build(Registro.localPath);
+            root = doc.getRootElement();
+            rootChildrens = root.getChildren();            
+            for (Element child : rootChildrens) {                
+                if (child.getAttributeValue("id").equals(String.valueOf(id))){                    
+                    child.removeContent(new Element("accion"));                    
+                }
+            }
+        } catch (JDOMException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

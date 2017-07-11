@@ -46,6 +46,6 @@ public class MobResource {
     @DELETE
     @Path("/{id}")
     public void deleteMob(@PathParam("id") int id){
-        
+        mService.removeMob(id);
     }
 }
