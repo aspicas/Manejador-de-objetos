@@ -6,4 +6,6 @@ and open the template in the editor.
 -->
 <root>
   <mob accion="accion" fechaCreacion="Mon Jul 10 21:44:16 VET 2017" id="1" nombre="pepe" />
+  <mob accion="Commit" fechaCreacion="Sat Jun 10 21:44:16 VET 2017" id="2" nombre="pepe2" />
+  <mob accion="Commit" fechaCreacion="Sat Jun 10 21:44:16 VET 2017" id="2" nombre="pepe2" />
 </root>

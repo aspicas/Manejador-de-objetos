@@ -53,7 +53,7 @@ public class XMLManager {
                 out.output(doc,file);
                 file.flush();
                 file.close();
-                return true;                
+                return true;
              }
              catch(Exception e)
              {

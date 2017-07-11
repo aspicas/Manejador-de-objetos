@@ -18,6 +18,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import model.Mob;
+import services.MobService;
 import xml.XMLManager;
 
 /**
@@ -28,6 +29,7 @@ import xml.XMLManager;
 @Path("/objects")
 @Produces(MediaType.APPLICATION_XML)
 public class MobResource {
+    private MobService mService = new MobService();
     
     @GET
     @Path("/{id}")
@@ -38,9 +40,8 @@ public class MobResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public Mob addMob(Mob mob) {
-        XMLManager.saveMobXml(mob);
-        return mob;
+    public void addMob(Mob mob) {
+        mService.addMob(mob);
     }
     
     @DELETE

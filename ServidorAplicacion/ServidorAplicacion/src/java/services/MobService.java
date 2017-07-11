@@ -6,6 +6,7 @@
 package services;
 
 import model.Mob;
+import xml.XMLManager;
 
 /**
  *
@@ -20,8 +21,8 @@ public class MobService {
         return null;
     }
     
-    public Mob addMob(Mob mob){
-        return null;
+    public void addMob(Mob mob){
+        XMLManager.saveMobXml(mob);        
     }
     
     public void removeMob(int id){
