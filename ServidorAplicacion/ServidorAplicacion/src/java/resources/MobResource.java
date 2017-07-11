@@ -34,8 +34,7 @@ public class MobResource {
     @GET
     @Path("/{id}")
     public Mob getMob(@PathParam("id") int id) {
-        Date date = new Date();
-        return new Mob(id, date, "nombre", "accion");
+        return mService.getMob(id);
     }
     
     @POST

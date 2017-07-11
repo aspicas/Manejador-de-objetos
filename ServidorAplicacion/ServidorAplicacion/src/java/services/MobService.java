@@ -18,11 +18,11 @@ public class MobService {
     }
     
     public Mob getMob(int id){
-        return null;
+        return XMLManager.getMob(id);
     }
     
     public void addMob(Mob mob){
-        XMLManager.saveMobXml(mob);        
+        XMLManager.addMobXml(mob);        
     }
     
     public void removeMob(int id){

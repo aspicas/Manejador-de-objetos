@@ -11,7 +11,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Mob;
 import model.Registro;
 import org.jdom2.Document;
@@ -27,11 +30,10 @@ import org.jdom2.output.XMLOutputter;
  * @author david
  */
 public class XMLManager {
-    public static boolean saveMobXml(Mob mob){
+    public static boolean addMobXml(Mob mob){
         Document doc;
         Element root,child, newChild;
-        List <Element> rootChildrens;               
-        int pos = 0;
+        List <Element> rootChildrens;        
         SAXBuilder builder = new SAXBuilder();
         try
         {   
@@ -76,5 +78,30 @@ public class XMLManager {
             e.printStackTrace();
         }
         return false;
+    }
+    
+    public static Mob getMob(int id){
+        try {
+            Document doc;
+            Element root;
+            List <Element> rootChildrens;
+            SAXBuilder builder = new SAXBuilder();
+            Mob mob;
+            doc = builder.build(Registro.localPath);
+            root = doc.getRootElement();
+            rootChildrens = root.getChildren();            
+            for (Element child : rootChildrens) {                
+                if (child.getAttributeValue("id").equals(String.valueOf(id))){
+                    Date d = new Date();
+                    mob = new Mob(id, d, child.getAttributeValue("nombre"), child.getAttributeValue("accion"));
+                    return mob;
+                }
+            }            
+        } catch (JDOMException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }
