@@ -18,6 +18,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import model.Mob;
+import xml.XMLManager;
 
 /**
  * REST Web Service
@@ -37,7 +38,8 @@ public class MobResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_XML)
-    public Mob addMob(Mob mob) {        
+    public Mob addMob(Mob mob) {
+        XMLManager.saveMobXml(mob);
         return mob;
     }
     
