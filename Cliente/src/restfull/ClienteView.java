@@ -21,6 +21,7 @@ public class ClienteView extends javax.swing.JFrame {
     public ClienteView() {
         initComponents();
         rest = new RestClient();
+        Mob mob = null;
     }
 
     /**
@@ -39,6 +40,10 @@ public class ClienteView extends javax.swing.JFrame {
         nombre = new javax.swing.JTextField();
         tipo = new javax.swing.JComboBox<>();
         enviar = new javax.swing.JButton();
+        idView = new javax.swing.JLabel();
+        fechaView = new javax.swing.JLabel();
+        accionView = new javax.swing.JLabel();
+        nombreView = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,6 +68,14 @@ public class ClienteView extends javax.swing.JFrame {
             }
         });
 
+        idView.setText("Id");
+
+        fechaView.setText("Fecha");
+
+        accionView.setText("Accion");
+
+        nombreView.setText("Nombre");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,15 +89,26 @@ public class ClienteView extends javax.swing.JFrame {
                                 .addComponent(idLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(clienteLabel)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(nombreLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(clienteLabel))
-                        .addGap(46, 46, 46)
-                        .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(idView)
+                                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nombreView))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(fechaView)
+                                    .addComponent(accionView))
+                                .addGap(64, 64, 64))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
+                        .addGap(129, 129, 129)
                         .addComponent(enviar)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
@@ -102,6 +126,14 @@ public class ClienteView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nombreLabel))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idView)
+                    .addComponent(fechaView))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(accionView)
+                    .addComponent(nombreView))
                 .addGap(18, 18, 18)
                 .addComponent(enviar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -123,8 +155,14 @@ public class ClienteView extends javax.swing.JFrame {
                 rest.addMob(mob);
                 break;
             case "Eliminar":
+                rest.deleteMob(id.getText());
                 break;
-            case "Consultar":
+            case "Consultar":                
+                mob = rest.getMob(id.getText());
+                idView.setText(String.valueOf(mob.getId()));
+                fechaView.setText(mob.getFechaCreacion().toString());
+                nombreView.setText(mob.getNombre());
+                accionView.setText(mob.getAccion());
                 break;
             case "Replicar":
                 break;
@@ -169,12 +207,16 @@ public class ClienteView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel accionView;
     private javax.swing.JLabel clienteLabel;
     private javax.swing.JButton enviar;
+    private javax.swing.JLabel fechaView;
     private javax.swing.JTextField id;
     private javax.swing.JLabel idLabel;
+    private javax.swing.JLabel idView;
     private javax.swing.JTextField nombre;
     private javax.swing.JLabel nombreLabel;
+    private javax.swing.JLabel nombreView;
     private javax.swing.JComboBox<String> tipo;
     // End of variables declaration//GEN-END:variables
 }

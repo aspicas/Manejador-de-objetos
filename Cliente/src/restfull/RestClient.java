@@ -8,8 +8,12 @@ package restfull;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import static javax.ws.rs.client.ClientBuilder.newClient;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import model.Mob;
 import model.Registro;
 
@@ -35,18 +39,19 @@ public class RestClient {
         webTarget = client.target(Registro.BASE_URI).path("objects");
     }
 
-//    public <T> T getMob(Class<T> responseType, String id) throws ClientErrorException {
-//        WebTarget resource = webTarget;
-//        resource = resource.path(java.text.MessageFormat.format("{0}", new Object[]{id}));
-//        return resource.get(responseType);
-//    }
+    public Mob getMob(String id) throws ClientErrorException {
+        Response response = webTarget.path(id).request(MediaType.APPLICATION_XML).get();
+        System.out.println("Status: " + response.getStatus());
+        Mob mob = response.readEntity(Mob.class);
+        return mob;
+    }
 
     public void addMob(Mob mob) throws ClientErrorException {
-        webTarget.request(MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(mob, MediaType.APPLICATION_XML));
+        webTarget.request(MediaType.APPLICATION_XML).post(Entity.entity(mob, MediaType.APPLICATION_XML));
     }
 
     public void deleteMob(String id) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id})).request().delete();
+        webTarget.path(id).request().delete();
     }
 
     public void close() {

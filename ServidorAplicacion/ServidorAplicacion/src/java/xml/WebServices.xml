@@ -11,8 +11,13 @@ and open the template in the editor.
     <nombre>pepe1</nombre>
   </mob>
   <mob id="2">
-    <accion>Commit</accion>
-    <fechaCreacion>Tue Jul 10 21:44:16 VET 2018</fechaCreacion>
-    <nombre>pepe2</nombre>
+    <accion />
+    <fechaCreacion>Thu Jul 13 11:42:17 VET 2017</fechaCreacion>
+    <nombre>alicia</nombre>
+  </mob>
+  <mob id="3">
+    <accion />
+    <fechaCreacion>Thu Jul 13 11:42:28 VET 2017</fechaCreacion>
+    <nombre>alicia</nombre>
   </mob>
 </root>
