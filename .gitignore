@@ -1,3 +1,5 @@
 WebServices/.idea/*
 /ServidorAplicacion/ServidorAplicacion/nbproject/private/
 /ServidorAplicacion/ServidorAplicacion/build/
+/Cliente/nbproject/private/
+/Cliente/build/
