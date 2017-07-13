@@ -89,7 +89,6 @@ public class ClienteView extends javax.swing.JFrame {
                                 .addComponent(idLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(clienteLabel)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(nombreLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -108,9 +107,12 @@ public class ClienteView extends javax.swing.JFrame {
                                     .addComponent(accionView))
                                 .addGap(64, 64, 64))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
+                        .addGap(182, 182, 182)
+                        .addComponent(clienteLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
                         .addComponent(enviar)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
