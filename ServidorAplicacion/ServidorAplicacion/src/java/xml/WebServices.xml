@@ -5,11 +5,6 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <root>
-  <mob id="4">
-    <accion>Commit</accion>
-    <fechaCreacion>Mon Jul 10 21:44:16 VET 2017</fechaCreacion>
-    <nombre>pepe4</nombre>
-  </mob>
   <mob id="1">
     <accion>Commit</accion>
     <fechaCreacion>Tue Jul 10 21:44:16 VET 2018</fechaCreacion>

@@ -55,11 +55,6 @@ public class XMLManager {
             nombre.setText(mob.getNombre());
             newChild.addContent(nombre);
             newChild.setAttribute("id", String.valueOf(mob.getId()));
-            
-//            newChild.setAttribute("accion", mob.getAccion());       
-//            newChild.setAttribute("fechaCreacion", mob.getFechaCreacion().toString());
-//            newChild.setAttribute("id", String.valueOf(mob.getId()));
-//            newChild.setAttribute("nombre", mob.getNombre());
             root.addContent(newChild);
             try
              {
@@ -133,7 +128,14 @@ public class XMLManager {
             rootChildrens = root.getChildren();            
             for (Element child : rootChildrens) {                
                 if (child.getAttributeValue("id").equals(String.valueOf(id))){                    
-                    child.removeContent(new Element("accion"));                    
+                    rootChildrens.remove(child);
+                    Format format = Format.getPrettyFormat();
+                    XMLOutputter out = new XMLOutputter(format);
+                    FileOutputStream file = new FileOutputStream(Registro.localPath);
+                    out.output(doc,file);
+                    file.flush();
+                    file.close();
+                    break;
                 }
             }
         } catch (JDOMException ex) {
