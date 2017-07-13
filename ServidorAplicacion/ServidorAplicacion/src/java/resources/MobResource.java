@@ -48,4 +48,16 @@ public class MobResource {
     public void deleteMob(@PathParam("id") int id){
         mService.removeMob(id);
     }
+    
+    @GET
+    @Path("/replicar")
+    public void replicar(){
+        
+    }
+    
+    @GET
+    @Path("/restaurar")
+    public void restaurar(){
+        
+    }
 }

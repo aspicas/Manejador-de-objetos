@@ -15,9 +15,4 @@ and open the template in the editor.
     <fechaCreacion>Thu Jul 13 11:42:17 VET 2017</fechaCreacion>
     <nombre>alicia</nombre>
   </mob>
-  <mob id="3">
-    <accion />
-    <fechaCreacion>Thu Jul 13 11:42:28 VET 2017</fechaCreacion>
-    <nombre>alicia</nombre>
-  </mob>
 </root>

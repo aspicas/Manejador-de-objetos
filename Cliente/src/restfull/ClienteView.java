@@ -167,8 +167,10 @@ public class ClienteView extends javax.swing.JFrame {
                 accionView.setText(mob.getAccion());
                 break;
             case "Replicar":
+                rest.replicar();
                 break;
             case "Restaurar":
+                rest.restaurar();
                 break;    
         }
     }//GEN-LAST:event_enviarActionPerformed

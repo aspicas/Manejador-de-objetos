@@ -54,6 +54,16 @@ public class RestClient {
         webTarget.path(id).request().delete();
     }
 
+    public void replicar() throws ClientErrorException {
+        Response response = webTarget.path("replicar").request().get();
+        System.out.println("Status: " + response.getStatus());
+    }
+    
+    public void restaurar() throws ClientErrorException {
+        Response response = webTarget.path("restaurar").request().get();
+        System.out.println("Status: " + response.getStatus());
+    }
+    
     public void close() {
         client.close();
     }
