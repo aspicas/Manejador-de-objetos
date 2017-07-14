@@ -20,7 +20,7 @@ public class ClienteView extends javax.swing.JFrame {
 
     private RestClient rest;
     public Servidor server;
-    public static String ipServer="192.168.43.174";
+    public static String ipServer=Registro.aplicacion;
     /**
      * Creates new form ClienteView
      */

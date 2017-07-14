@@ -16,6 +16,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Registro;
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -28,9 +29,9 @@ import org.jdom2.input.SAXBuilder;
  */
 public class Manager extends UnicastRemoteObject implements InterfaceDistribuidos {
     
-    public static String clientIp1 = "192.168.43.174";
-    public static String clientIp2 = "192.168.43.174";
-    public static String ipServer = "192.168.43.174";
+    public static String clientIp1 = Registro.cliente;
+    public static String clientIp2 = Registro.servidorReplicas;
+    public static String ipServer = Registro.aplicacion;
     public static String localPath ="src\\xml\\WebServices.xml";
     
     public Manager() throws RemoteException {        

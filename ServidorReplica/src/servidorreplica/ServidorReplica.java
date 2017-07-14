@@ -32,7 +32,7 @@ import org.jdom2.output.XMLOutputter;
  */
 public class ServidorReplica extends UnicastRemoteObject {
 
-    public static String _ip = "192.168.43.174";
+    public static String _ip = Registro.servidorReplicas;
     public Servidor server;
     
     public ServidorReplica() throws RemoteException {
