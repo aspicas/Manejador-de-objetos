@@ -14,6 +14,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -100,24 +102,21 @@ public class Manager extends UnicastRemoteObject implements InterfaceDistribuido
             Document document = builder.build(localPath);
             Element rootNode = document.getRootElement();
            if ("WebServices".equals(rootNode.getName())) {
-                List<Element> le= rootNode.getChildren("event");
-                for(int i=0;i<le.size();i++){
-                    
-                    Attribute codigo = le.get(i).getAttribute("Codigo");
-                    Attribute accion = le.get(i).getAttribute("Accion");
-                    Attribute ingrediente = le.get(i).getAttribute("Ingrediente");
-                    Attribute cantidad = le.get(i).getAttribute("Cantidad");
-                    Attribute hora = le.get(i).getAttribute("Hora");
-                    ct = codigo.getValue()+"#"+accion.getValue()+"#"+ingrediente.getValue()+"#"+cantidad.getValue()+"#"+hora.getValue()+"%"+ct;
-                    
+                List<Element> le= rootNode.getChildren("mob");
+                for(int i=0;i<le.size();i++){                    
+                    Attribute accion = le.get(i).getAttribute("accion");
+                    Attribute fechaCreacion = le.get(i).getAttribute("fechaCreacion");
+                    Attribute nombre = le.get(i).getAttribute("nombre");
+                    Attribute id = le.get(i).getAttribute("id");                    
+                    ct = accion.getValue()+"#"+fechaCreacion.getValue()+"#"+nombre.getValue()+"#"+id.getValue()+"%"+ct;                    
                 }
                 System.out.println(ct);
                 return ct;
         }
         } catch (JDOMException ex) {
-            //Logger.getLogger(Xml.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-           // Logger.getLogger(Xml.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
