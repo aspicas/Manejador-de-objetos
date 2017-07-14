@@ -28,14 +28,14 @@ import org.jdom2.output.XMLOutputter;
 
 public class XMLManager {
     
-    private static String pathXML = "src\\Distribuidos\\Fumador.xml";
+    private static String pathXML = "src\\restfull\\Cliente.xml";
     
     
      public static void desdecero(){
         try {
             
             Document doc= new Document();
-            doc.setRootElement(new Element("FumadorReplica"));
+            doc.setRootElement(new Element("Cliente"));
             XMLOutputter xmlOutputter = new XMLOutputter(Format.getPrettyFormat());
             //output xml to console for debugging
             //xmlOutputter.output(doc, System.out);
@@ -72,16 +72,15 @@ public class XMLManager {
                     break;
             }
             // Creamos una nueva etiqueta
-            newChild = new Element("event");
+            newChild = new Element("mob");
             // Añadimos un atributo
             DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
             Date now = Calendar.getInstance().getTime();
             String g = df.format(now);
             newChild.setAttribute("Codigo",CodFumador);
-            newChild.setAttribute("Accion",accion );
-            newChild.setAttribute("Ingrediente", i );
-            newChild.setAttribute("Cantidad", Integer.toString(1));
-            newChild.setAttribute("Hora", g);
+            newChild.setAttribute("nombre",accion );
+            newChild.setAttribute("id", i );
+            newChild.setAttribute("fechaCreacion", g);
                
                root.addContent(newChild);
 

@@ -71,11 +71,11 @@ public class ThreadManager extends Thread{
             }else if (comando[0].equals("VOTE_RESTA")){
             
                 if(comando[1].equals("1")){
-                    RestauracionXML("Fumador.xml");
+                    RestauracionXML("Cliente.xml");
                     this.Responder(socket,"OK");
                 }else if (comando[1].equals("2")){
                     
-                    RestauracionXML("Vendedor.xml");
+                    RestauracionXML("ServidorReplica.xml");
                     this.Responder(socket,"OK");
                 }
                 
@@ -129,7 +129,7 @@ public class ThreadManager extends Thread{
          boolean op =false;
            try
         {
-            doc = builder.build("src/Distribuidos/"+DocumentoXML);
+            doc = builder.build("src/restfull/"+DocumentoXML);
             root = doc.getRootElement();            
             rootChildrens = root.getChildren();
             rootChildrens.removeAll(rootChildrens);            
@@ -137,7 +137,7 @@ public class ThreadManager extends Thread{
             {
                 Format format = Format.getPrettyFormat();
                 XMLOutputter out = new XMLOutputter(format);                
-                try (FileOutputStream file = new FileOutputStream("src/Distribuidos/"+DocumentoXML)) {
+                try (FileOutputStream file = new FileOutputStream("src/restfull/"+DocumentoXML)) {
                     out.output(doc,file);
                     file.flush();
                 }

@@ -29,7 +29,7 @@ public class Manager extends UnicastRemoteObject implements InterfaceDistribuido
     public static String clientIp1 = "192.168.43.174";
     public static String clientIp2 = "192.168.43.174";
     public static String ipServer = "192.168.43.174";
-    public static String localPath ="src\\ServidorCentral.xml";
+    public static String localPath ="src\\xml\\WebServices.xml";
     
     public Manager() throws RemoteException {        
         super();
@@ -99,7 +99,7 @@ public class Manager extends UnicastRemoteObject implements InterfaceDistribuido
             SAXBuilder builder = new SAXBuilder();
             Document document = builder.build(localPath);
             Element rootNode = document.getRootElement();
-           if ("ServidorCentral".equals(rootNode.getName())) {
+           if ("WebServices".equals(rootNode.getName())) {
                 List<Element> le= rootNode.getChildren("event");
                 for(int i=0;i<le.size();i++){
                     
