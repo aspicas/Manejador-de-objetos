@@ -42,10 +42,11 @@ public class Manager extends UnicastRemoteObject implements InterfaceDistribuido
     public static void main(String[] args) {
         // TODO code application logic here
         
-         try {
-             
+         try {             
             Registry registry = LocateRegistry.createRegistry(1099);
             registry.rebind("rmi://"+ipServer+"/InterfaceDistribuidos", new Manager());
+            Registry registry2 = LocateRegistry.createRegistry(9999);
+            registry2.rebind("rmi://"+ipServer+":9999/InterfaceDistribuidos", new Manager());
             System.err.println("Server ready");
         } catch (Exception e) {
             System.err.println("Server exception: " + e.toString());
@@ -76,7 +77,7 @@ public class Manager extends UnicastRemoteObject implements InterfaceDistribuido
              respuesta = "ABORT";
         } else {
             
-             respuesta = "DUAL";
+             respuesta = "GLOBAL_ABORT";
         }
         System.out.println(respuesta);
         return respuesta;

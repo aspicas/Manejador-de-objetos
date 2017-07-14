@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JFrame;
 import model.Mob;
 import org.jdom2.Document;
@@ -65,7 +66,14 @@ public class ThreadManager extends Thread{
                 
                 
                 // AQUIII Preguntar SI EL USUARIO QUIERE ACEPTAR EL REPLICAR
-                   this.Responder(socket,"VOTE_COMMIT");
+                Random random = new Random();             
+                int aux = random.nextInt(2);                             
+                    // AQUIII Preguntar SI EL USUARIO QUIERE ACEPTAR EL REPLICAR
+                if (aux == 0){                    
+                    this.Responder(socket,"VOTE_COMMIT");                    
+                }else{
+                    this.Responder(socket, "VOTE_ABORT");
+                }
                    //this.Responder(socket, "VOTE_ABORT");
                    
             }else if (comando[0].equals("GLOBAL_REPLICA")){

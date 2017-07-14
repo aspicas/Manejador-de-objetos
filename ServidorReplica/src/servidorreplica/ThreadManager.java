@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Mob;
@@ -63,7 +64,14 @@ public class ThreadManager extends Thread{
             if (comando[0].equals("VOTE_REQUEST")){
                 
                 // AQUIII Preguntar SI EL USUARIO QUIERE ACEPTAR EL REPLICAR
-                this.Responder(socket,"VOTE_COMMIT");
+                Random random = new Random();             
+                int aux = random.nextInt(2);                             
+                    // AQUIII Preguntar SI EL USUARIO QUIERE ACEPTAR EL REPLICAR
+                if (aux == 0){                    
+                    this.Responder(socket,"VOTE_COMMIT");                    
+                }else{
+                    this.Responder(socket, "VOTE_ABORT");
+                }
             }else if (comando[0].equals("GLOBAL_REPLICA")){
                 //System.out.println(comando[1]);
                 replicarXML(comando[1]);
@@ -73,11 +81,11 @@ public class ThreadManager extends Thread{
             }else if (comando[0].equals("VOTE_RESTA")){
             
                 if(comando[1].equals("1")){
-                    RestauracionXML("Fumador.xml");
+                    RestauracionXML("Cliente.xml");
                     this.Responder(socket,"OK");
                 }else if (comando[1].equals("2")){
                     
-                    RestauracionXML("Vendedor.xml");
+                    RestauracionXML("ServidorReplica.xml");
                     this.Responder(socket,"OK");
                 }
                 
