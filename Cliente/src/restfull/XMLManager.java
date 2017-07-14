@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import model.Mob;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -46,7 +47,7 @@ public class XMLManager {
         }
     }
      
-     public static boolean saveDataXML(String CodFumador, int ingrediente, String accion) {
+     public static boolean saveDataXML(Mob mob) {
          Document        doc;
         Element         root,child, newChild;
         List <Element>  rootChildrens;               
@@ -59,28 +60,12 @@ public class XMLManager {
             doc = builder.build(pathXML);
             root = doc.getRootElement();
             rootChildrens = root.getChildren();
-            String i = "";
-            switch (ingrediente) {
-                case 1:
-                    i = "Tabaco";
-                    break;
-                case 2:
-                    i = "Papel";
-                    break;
-                case 3:
-                    i = "Fosforo";
-                    break;
-            }
             // Creamos una nueva etiqueta
             newChild = new Element("mob");
-            // Añadimos un atributo
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-            Date now = Calendar.getInstance().getTime();
-            String g = df.format(now);
-            newChild.setAttribute("Codigo",CodFumador);
-            newChild.setAttribute("nombre",accion );
-            newChild.setAttribute("id", i );
-            newChild.setAttribute("fechaCreacion", g);
+            newChild.setAttribute("accion",mob.getAccion());
+            newChild.setAttribute("fechaCreacion",mob.getFechaCreacion().toString());
+            newChild.setAttribute("nombre",mob.getNombre());
+            newChild.setAttribute("id", String.valueOf(mob.getId()));
                
                root.addContent(newChild);
 
