@@ -33,10 +33,12 @@ import org.jdom2.output.XMLOutputter;
 public class ServidorReplica extends UnicastRemoteObject {
 
     public static String _ip = "192.168.43.174";
-    public static Servidor server;
-    public static Thread t;
+    public Servidor server;
     
     public ServidorReplica() throws RemoteException {
+         this.server= new Servidor(1133);
+        Thread t=new Thread(this.server);
+        server.start();
     }    
     
     /**
@@ -44,7 +46,7 @@ public class ServidorReplica extends UnicastRemoteObject {
      */
     public static void main(String[] args) {
         try{
-           
+           ServidorReplica server = new ServidorReplica();
         }catch(Exception ex){
             Logger.getLogger(ServidorReplica.class.getName()).log(Level.SEVERE, "Error main", ex);
         }

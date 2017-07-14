@@ -10,9 +10,11 @@ import java.rmi.RemoteException;
 
 /**
  *
- * @author david
+ * @author Rafael
  */
-public interface ServidorReplicaInterface extends Remote {
+public interface InterfaceDistribuidos extends Remote {
+    
     String replicar(String accion) throws RemoteException;
     String restaurar(String DocumentoXML) throws RemoteException;
+    
 }
