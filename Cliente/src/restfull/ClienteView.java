@@ -10,6 +10,7 @@ import java.rmi.registry.Registry;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import model.Mob;
+import model.Registro;
 
 /**
  *
@@ -175,30 +176,29 @@ public class ClienteView extends javax.swing.JFrame {
                 accionView.setText(mob.getAccion());
                 break;
             case "Replicar":
-                  try {
-             Registry registry = LocateRegistry.getRegistry(ipServer,1099);
-            InterfaceDistribuidos rmi_interface = (InterfaceDistribuidos) registry.lookup("rmi://"+ipServer+"/InterfaceDistribuidos");
-            String request = rmi_interface.replicar("VOTE_REQUEST");
-            System.out.println("response: " + request);
-            } catch (Exception e) {
-            System.err.println("Objeto exception: " + e.toString());
-            e.printStackTrace();
-        }
+                try {
+                    Registry registry = LocateRegistry.getRegistry(Registro.aplicacion,1099);
+                    InterfaceDistribuidos rmi_interface = (InterfaceDistribuidos) registry.lookup("rmi://"+Registro.aplicacion+"/InterfaceDistribuidos");
+                    String request = rmi_interface.replicar("VOTE_REQUEST");
+                    System.out.println("response: " + request);
+                } catch (Exception e) {
+                    System.err.println("Objeto exception: " + e.toString());
+                    e.printStackTrace();
+                }
                 break;
             case "Restaurar":
-                  try {
-                Registry registry = LocateRegistry.getRegistry(ipServer,9999);
-            InterfaceDistribuidos rmi_interface = (InterfaceDistribuidos) registry.lookup("rmi://"+ipServer+":9999/InterfaceDistribuidos");
-            String request= rmi_interface.restaurar("1");
-            System.out.println(request);
-            if (request.equals("OK")){
-                
-                JOptionPane.showMessageDialog(this,"Archivo Restaurado");
-            }
-             } catch (Exception e) {
-            System.err.println("Objeto exception: " + e.toString());
-            e.printStackTrace();
-        }
+                try {
+                    Registry registry = LocateRegistry.getRegistry(Registro.aplicacion,9999);
+                    InterfaceDistribuidos rmi_interface = (InterfaceDistribuidos) registry.lookup("rmi://"+Registro.aplicacion+":9999/InterfaceDistribuidos");
+                    String request= rmi_interface.restaurar("1");
+                    System.out.println(request);
+                    if (request.equals("OK")){
+                        JOptionPane.showMessageDialog(this,"Archivo Restaurado");
+                    }
+                } catch (Exception e) {
+                    System.err.println("Objeto exception: " + e.toString());
+                    e.printStackTrace();
+                }
                 break;    
         }
     }//GEN-LAST:event_enviarActionPerformed

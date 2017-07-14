@@ -45,15 +45,9 @@ public class XMLManager {
             rootChildrens = root.getChildren();
             // Creamos una nueva etiqueta
             newChild = new Element("mob");
-            accion = new Element("accion");
-            accion.setText(mob.getAccion());
-            newChild.addContent(accion);
-            fecha = new Element("fechaCreacion");
-            fecha.setText(mob.getFechaCreacion().toString());
-            newChild.addContent(fecha);            
-            nombre = new Element("nombre");
-            nombre.setText(mob.getNombre());
-            newChild.addContent(nombre);
+            newChild.setAttribute("accion",mob.getAccion());
+            newChild.setAttribute("fechaCreacion",mob.getFechaCreacion().toString());
+            newChild.setAttribute("nombre",mob.getNombre());
             newChild.setAttribute("id", String.valueOf(mob.getId()));
             root.addContent(newChild);
             try
@@ -102,8 +96,8 @@ public class XMLManager {
             for (Element child : rootChildrens) {                
                 if (child.getAttributeValue("id").equals(String.valueOf(id))){
                     DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
-                    Date d = format.parse(child.getChild("fechaCreacion").getText());                   
-                    mob = new Mob(id, d, child.getChild("nombre").getText(), child.getChild("accion").getText());
+                    Date d = format.parse(child.getAttributeValue("fechaCreacion"));                   
+                    mob = new Mob(id, d, child.getAttributeValue("nombre"), child.getAttributeValue("accion"));
                     return mob;
                 }
             }            
