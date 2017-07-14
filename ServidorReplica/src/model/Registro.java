@@ -14,5 +14,5 @@ public class Registro {
     public static final String aplicacion = "127.0.0.1";
     public static final String coordinadorR = "127.0.0.1";
     public static final String servidorReplicas = "127.0.0.1";
-    public static final String localPath = "/home/david/Programs/Manejador-de-objetos/ServidorAplicacion/ServidorAplicacion/src/java/xml/WebServices.xml";
+    public static final String localPath = "/home/david/Programs/Manejador-de-objetos/ServidorReplica/src/servidorreplica/ServidorReplica.xml";
 }

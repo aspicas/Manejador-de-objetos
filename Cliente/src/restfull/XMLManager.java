@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import model.Mob;
+import model.Registro;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -29,7 +30,7 @@ import org.jdom2.output.XMLOutputter;
 
 public class XMLManager {
     
-    private static String pathXML = "src\\restfull\\Cliente.xml";
+    private static String pathXML = Registro.localPath;
     
     
      public static void desdecero(){

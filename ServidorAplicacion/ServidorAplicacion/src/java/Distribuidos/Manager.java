@@ -32,7 +32,7 @@ public class Manager extends UnicastRemoteObject implements InterfaceDistribuido
     public static String clientIp1 = Registro.cliente;
     public static String clientIp2 = Registro.servidorReplicas;
     public static String ipServer = Registro.aplicacion;
-    public static String localPath ="src\\xml\\WebServices.xml";
+    public static String localPath =Registro.localPath;
     
     public Manager() throws RemoteException {        
         super();
