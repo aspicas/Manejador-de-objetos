@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 
 /**
  *
- * @author Rafael
+ * @author 
  */
 public interface InterfaceDistribuidos extends Remote {
     
