@@ -11,7 +11,14 @@ import java.io.DataOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Mob;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -27,6 +34,7 @@ import org.jdom2.output.XMLOutputter;
 public class ThreadManager extends Thread{
     
     private Socket socket;
+    private Mob mob = new Mob();
     public String sf= new String();
     Servidor serv;
     
@@ -81,7 +89,8 @@ public class ThreadManager extends Thread{
         }
     }
     
-   private void replicarXML(String data){
+   private void replicarXML(String data) throws ParseException{
+       
         int ingrediente = 0;
         XMLManager.desdecero();
         // & $
@@ -92,23 +101,15 @@ public class ThreadManager extends Thread{
         {            
             String[] hijo = hijos[i].split("#");
             System.out.println(i+": "+hijo.length);
-                if (!hijo[2].equals(null) ){
-
-                    if (hijo[2].equals("Tabaco")){
-
-                        ingrediente = 1;
-
-                    }else if(hijo[2].equals("Papel")){
-                        ingrediente = 2;
-
-                    }else{ 
-                        ingrediente = 3;
-                    }
-
-                }
-                XMLManager.saveDataXML(hijo[0],ingrediente,hijo[1]);
+              mob.setAccion(hijo[0]);
+              DateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
+                    Date d = format.parse(hijo[1]);      
+              mob.setFechaCreacion(d);
+              mob.setNombre(hijo[2]);
+              mob.setId(Integer.parseInt(hijo[3]));
+                XMLManager.saveDataXML(mob);
             }
-            
+       
 //ManejadorXmlCliente.saveFumadorDataBase(hijo[0],Integer.parseInt(hijo[2]),hijo[1]);
         }
    
