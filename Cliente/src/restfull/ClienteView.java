@@ -5,7 +5,10 @@
  */
 package restfull;
 
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import model.Mob;
 
 /**
@@ -15,6 +18,8 @@ import model.Mob;
 public class ClienteView extends javax.swing.JFrame {
 
     private RestClient rest;
+    public Servidor server;
+    public static String ipServer="192.168.43.174";
     /**
      * Creates new form ClienteView
      */
@@ -22,6 +27,9 @@ public class ClienteView extends javax.swing.JFrame {
         initComponents();
         rest = new RestClient();
         Mob mob = null;
+         this.server= new Servidor(1122, this);
+        Thread t=new Thread(this.server);
+        server.start();
     }
 
     /**
@@ -167,10 +175,30 @@ public class ClienteView extends javax.swing.JFrame {
                 accionView.setText(mob.getAccion());
                 break;
             case "Replicar":
-                rest.replicar();
+                  try {
+             Registry registry = LocateRegistry.getRegistry(ipServer,1099);
+            InterfaceDistribuidos rmi_interface = (InterfaceDistribuidos) registry.lookup("rmi://"+ipServer+"/InterfaceDistribuidos");
+            String request = rmi_interface.replicar("VOTE_REQUEST");
+            System.out.println("response: " + request);
+            } catch (Exception e) {
+            System.err.println("Objeto exception: " + e.toString());
+            e.printStackTrace();
+        }
                 break;
             case "Restaurar":
-                rest.restaurar();
+                  try {
+                Registry registry = LocateRegistry.getRegistry(ipServer,9999);
+            InterfaceDistribuidos rmi_interface = (InterfaceDistribuidos) registry.lookup("rmi://"+ipServer+":9999/InterfaceDistribuidos");
+            String request= rmi_interface.restaurar("1");
+            System.out.println(request);
+            if (request.equals("OK")){
+                
+                JOptionPane.showMessageDialog(this,"Archivo Restaurado");
+            }
+             } catch (Exception e) {
+            System.err.println("Objeto exception: " + e.toString());
+            e.printStackTrace();
+        }
                 break;    
         }
     }//GEN-LAST:event_enviarActionPerformed
